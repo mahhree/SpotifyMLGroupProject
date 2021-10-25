@@ -17,3 +17,4 @@ def create_dataset_csv(all_artists, all_ranks, all_titles, all_years, csv_locati
     df['Rank'] = all_ranks
     print(df)
     df.to_csv(csv_location)
+

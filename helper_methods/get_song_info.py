@@ -10,7 +10,7 @@ sp = spotipy.Spotify(
         client_secret=client_secret))
 
 
-def get_song_id(name_of_song, correct_artist):
+def get_song_id_and_artists(name_of_song, correct_artist):
     # step 1: encode artists name and pass to search query
     results = sp.search(
         q=name_of_song.replace(' ', '%'),  # song searched
@@ -61,26 +61,46 @@ def get_artist_genres(artist_id):
 
 def get_song_genres(artist_id_list):
     genre_list = []
+    genre_matches = []
     for artist_id in artist_id_list:
         genre_list += get_artist_genres(artist_id)
         # print(genre_list)
     # print(genre_list)
 
-    print(f'Song genres before removing duplicates: {genre_list}')
+    unique_genres = set(genre_list)
 
-    genre_list = set(genre_list)
-    new_genre_list = []
-    for genre in genre_list:
-        new_genre_list.append(genre)
-    print(f'Song genres after removing duplicates: {new_genre_list}')
+    if len(artist_id_list) > 1:
+        if len(unique_genres) > 1:
+            for genre in unique_genres:
+                if genre_list.count(genre) > 1:
+                    genre_matches.append(genre)
 
-    return new_genre_list
+            if len(genre_matches) > 0:
+                print(f'Genre matches of featured Artists: {genre_matches}')
+                return genre_matches
+            else:
+                print(f'Song genres: {genre_list}')
+                return genre_list
+        elif len(unique_genres) == 1:
+            print(f'Song genres: {genre_list}')
+            return genre_list
+        else:
+            print('No genres found for song.')
+            return None
+    else:
+        if len(genre_list) > 0:
+            print(f'Song genres: {genre_list}')
+            return genre_list
+        else:
+            print('No genres found for song.')
+            return None
 
 
-song_info = get_song_id('Family Ties', 'Baby Keem & Kendrick Lamar')
+song_info = get_song_id_and_artists('Chosen', 'Blxst & Tyga Featuring Ty Dolla $ign')
 
-song_id = song_info[0]
+song_id1 = song_info[0]
 artists_ids = song_info[1]
 song_genres = get_song_genres(artists_ids)
-
 print(song_genres)
+
+# print(*song_genres, sep=', ')
