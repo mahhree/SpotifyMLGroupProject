@@ -39,7 +39,7 @@ def get_song_id(name_of_song, correct_artist):
         print('Artists featured:')
         for artist in artist_info_dict.keys():
             print(f'- {artist}')
-            print(artist_info_dict[artist])
+            print(f'\t- artist ID: {artist_info_dict[artist]}')
 
         return [song_id, list(artist_info_dict.values())]
     else:
