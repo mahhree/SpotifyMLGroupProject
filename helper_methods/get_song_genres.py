@@ -65,7 +65,16 @@ def get_song_genres(artist_id_list):
         genre_list += get_artist_genres(artist_id)
         # print(genre_list)
     # print(genre_list)
-    return genre_list
+
+    print(f'Song genres before removing duplicates: {genre_list}')
+
+    genre_list = set(genre_list)
+    new_genre_list = []
+    for genre in genre_list:
+        new_genre_list.append(genre)
+    print(f'Song genres after removing duplicates: {new_genre_list}')
+
+    return new_genre_list
 
 
 song_info = get_song_id('Family Ties', 'Baby Keem & Kendrick Lamar')
@@ -73,4 +82,5 @@ song_info = get_song_id('Family Ties', 'Baby Keem & Kendrick Lamar')
 song_id = song_info[0]
 artists_ids = song_info[1]
 song_genres = get_song_genres(artists_ids)
+
 print(song_genres)
