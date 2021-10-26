@@ -47,7 +47,7 @@ def get_song_id_and_artists(name_of_song, correct_artist):
         print(f'{correct_artist} not found in song artists:')
         for artist in artist_info_dict.keys():
             print(artist)
-        return None
+        return [None, None]
 
 
 def get_artist_genres(artist_id):
@@ -96,11 +96,11 @@ def get_song_genres(artist_id_list):
             return None
 
 
-song_info = get_song_id_and_artists('Chosen', 'Blxst & Tyga Featuring Ty Dolla $ign')
-
-song_id1 = song_info[0]
-artists_ids = song_info[1]
-song_genres = get_song_genres(artists_ids)
-print(song_genres)
+# song_info = get_song_id_and_artists('Chosen', 'Blxst & Tyga Featuring Ty Dolla $ign')
+#
+# song_id1 = song_info[0]
+# artists_ids = song_info[1]
+# song_genres = get_song_genres(artists_ids)
+# print(song_genres)
 
 # print(*song_genres, sep=', ')

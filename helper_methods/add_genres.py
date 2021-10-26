@@ -15,15 +15,22 @@ def add_genres_to_csv(csv_location, new_location):
         song_info = get_song_id_and_artists(title, artist)
 
         # song_id = song_info[0]
-        song_spotify_ids.append(song_info[0])
+        if song_info[0] is not None:
+            song_spotify_ids.append(str(song_info[0]))
+        else:
+            song_spotify_ids.append('-')
 
         # artists_ids = song_info[1]
-        song_genre_list = get_song_genres(song_info[1])
-        if song_genre_list is not None:
-            song_genre_string = ', '.join([str(genre) for genre in song_genre_list])
+        if song_info[1] is not None:
+            song_genre_list = get_song_genres(song_info[1])
+            if song_genre_list is not None:
+                song_genre_string = ', '.join([str(genre) for genre in song_genre_list])
+            else:
+                song_genre_string = '-'
+            song_genres.append(song_genre_string)
         else:
             song_genre_string = '-'
-        song_genres.append(song_genre_string)
+            song_genres.append(song_genre_string)
 
     print('Song Genres:\n')
     print(*song_genres, sep='\n')
@@ -34,13 +41,16 @@ def add_genres_to_csv(csv_location, new_location):
 
     df['Genre'] = song_genres
     df['Spotify Song ID'] = song_spotify_ids
-    df.to_csv(new_location)
+    df.to_csv(new_location, index=False)
 
     # print(df)
 
 
 # add_genres_to_csv('../datasets/current_billboard_top_100_songs.csv',
-#                   '../datasets/top_100_2021_with_genres')
+#                   '../datasets/top_100_2021_with_genres.csv')
 
-df = pd.read_csv('../datasets/top_100_2021_with_genres')
+add_genres_to_csv('../datasets/billboard_top_100_songs.csv',
+                  '../datasets/top_100_2011-2020_with_genres.csv')
+
+df = pd.read_csv('../datasets/top_100_2011-2020_with_genres.csv')
 print(df)
