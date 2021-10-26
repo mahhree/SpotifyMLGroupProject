@@ -49,8 +49,8 @@ def add_genres_to_csv(csv_location, new_location):
 # add_genres_to_csv('../datasets/current_billboard_top_100_songs.csv',
 #                   '../datasets/top_100_2021_with_genres.csv')
 
-add_genres_to_csv('../datasets/billboard_top_100_songs.csv',
-                  '../datasets/top_100_2011-2020_with_genres.csv')
-
-df = pd.read_csv('../datasets/top_100_2011-2020_with_genres.csv')
-print(df)
+# add_genres_to_csv('../datasets/billboard_top_100_songs.csv',
+#                   '../datasets/top_100_2011-2020_with_genres.csv')
+#
+# df = pd.read_csv('../datasets/top_100_2011-2020_with_genres.csv')
+# print(df)
